@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        class Block{
+            constructor(id, data, previousId = ''){
+            this.id = id;
+            this.previousId = previousId;
+            this.data = data;
+            }
+        }
+        class Blockchain{
+            
+            constructor(){
+                this.chain = [this.createFirstBlock()];
+            }
+            createFirstBlock(){
+                return new Block(0, "Hola", 0, 1);
+            }
+            getLatestBlock(){
+                return this.chain[this.chain.length-1];
+            }
+            addblock(nuevoBloque){
+                nuevoBloque.previousId = this.getLatestBlock().id;
+                this.chain.push(nuevoBloque);
+            }
+            /*isValidChain(){
+                let num = this.chain.length;
+                console.log("Chain length: "+num);
+                for(let i = 1; i <= this.chain.length; i++){
+                    const currentBlock = this.chain[i];
+                    const previousBlock = this.chain[i-1];
+                    console.log(currentBlock.previousId);
+                    console.log(previousBlock.id);
+                    if(currentBlock.previousId != previousBlock.id){
+                        return false;
+                    }
+                    /*if(previousBlock.nextId != currentBlock.id){
+                        return false;
+                    }
+                    return true;
+                }
+            }*/
+            
+        }
+        let nuevoBloque = new Blockchain();
+        nuevoBloque.addblock(new Block(1, "adios"));
+        nuevoBloque.addblock(new Block(2, "buenas"));
+        nuevoBloque.addblock(new Block(3, "noches"));
+        console.log(JSON.stringify(nuevoBloque, null, 4))
+        /*console.log("Bloque1 id: "+nuevoBloque.chain[0].id+" Bloque1 Id anterior: "+nuevoBloque.chain[0].previousId);
+        console.log("Bloque2 id: "+nuevoBloque.chain[1].id+" Bloque1 Id anterior: "+nuevoBloque.chain[1].previousId);
+        console.log("Bloque3 id: "+nuevoBloque.chain[2].id+" Bloque1 Id anterior: "+nuevoBloque.chain[2].previousId);
+        console.log("Bloque4 id: "+nuevoBloque.chain[3].id+" Bloque1 Id anterior: "+nuevoBloque.chain[3].previousId);
+        console.log(nuevoBloque.chain[3].previousId);
+        console.log('Blockchain valid?' + nuevoBloque.isValidChain());
+        nuevoBloque.chain[2].id = 5;
+        console.log(nuevoBloque.chain[2].id);
+        console.log('Blockchain valid?' + nuevoBloque.isValidChain());
+        /*function onLoad(){
+            document.getElementById('blockdata').innerHTML = "asdase";
+        }
+        function onClickSiguiente(){
+            document.getElementById('blockdata').innerHTML = "dsfsda";
+        }*/
+    </script>
+</head>
+<body>
+
+    
+        
+</body>
+</body>
+</html>
